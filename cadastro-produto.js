@@ -98,4 +98,24 @@ function editarProduto(index) {
     produtoEditandoIndex = index;  // Marca o produto que está sendo editado
 }
 
+function adicionarAoCarrinho(index) {
+    let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    const produto = produtos[index];
+
+    // Verifica se o produto já está no carrinho
+    const produtoExistente = carrinho.find(p => p.nome === produto.nome);
+
+    if (produtoExistente) {
+        alert('Este produto já foi adicionado ao carrinho.');
+    } else {
+        // Adiciona o produto ao carrinho
+        carrinho.push(produto);
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        alert('Produto adicionado ao carrinho!');
+    }
+}
+
+
 window.onload = exibirProdutos;
